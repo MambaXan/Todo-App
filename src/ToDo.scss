@@ -1,0 +1,350 @@
+// TodoApp.scss
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+$primary-color: #6c5ce7;
+$secondary-color: #a29bfe;
+$accent-color: #fd79a8;
+$dark-color: #2d3436;
+$light-color: #f5f6fa;
+$success-color: #00b894;
+$warning-color: #fdcb6e;
+$danger-color: #d63031;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.todo-app {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeIn 0.5s ease-out;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header {
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  
+  p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+}
+
+.task-input-container {
+  display: flex;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.task-input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-right: 10px;
+
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+  }
+}
+
+.add-btn {
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: $primary-color;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  
+  .plus-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  
+  &:hover {
+    background: darken($primary-color, 10%);
+    transform: scale(1.05);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba($secondary-color, 0.1);
+}
+
+.filter-dropdown {
+  position: relative;
+}
+
+.filter-select {
+  appearance: none;
+  padding: 8px 35px 8px 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: $primary-color;
+  }
+}
+
+.dropdown-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: $dark-color;
+}
+
+.task-count {
+  font-size: 0.9rem;
+  color: rgba($dark-color, 0.7);
+}
+
+.task-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.task-item {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  animation: slideIn 0.3s ease-out;
+  
+  &:hover {
+    background: rgba($secondary-color, 0.05);
+  }
+  
+  &.important {
+    border-left: 4px solid $accent-color;
+    background: rgba($accent-color, 0.05);
+  }
+  
+  &.completed {
+    .task-text {
+      text-decoration: line-through;
+      color: rgba($dark-color, 0.5);
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.complete-btn {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  margin-right: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  background: transparent;
+  flex-shrink: 0;
+  
+  &.checked {
+    background: $success-color;
+    border-color: $success-color;
+    color: white;
+  }
+  
+  &:hover:not(.checked) {
+    border-color: $success-color;
+  }
+}
+
+.task-text {
+  flex: 1;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  cursor: text;
+  padding: 5px 0;
+}
+
+.edit-input {
+  flex: 1;
+  padding: 5px;
+  border: 2px solid $primary-color;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-right: 10px;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+.important-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: all 0.3s ease;
+  color: rgba($dark-color, 0.3);
+  flex-shrink: 0;
+  
+  &.active, &:hover {
+    color: $accent-color;
+    transform: scale(1.2);
+  }
+}
+
+.task-actions {
+  display: flex;
+  margin-left: 15px;
+}
+
+.edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 10px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.delete-btn:hover {
+  color: $danger-color;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba($dark-color, 0.5);
+  
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.3;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  small {
+    font-size: 0.9rem;
+  }
+}
+
+.footer {
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: rgba($dark-color, 0.5);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  
+  .drag-hint {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    color: rgba($dark-color, 0.3);
+    font-style: italic;
+  }
+}
+
+// Анимация при удалении задачи
+.task-item.exiting {
+  animation: slideOut 0.3s ease-out forwards;
+}
+
+@keyframes slideOut {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+}
